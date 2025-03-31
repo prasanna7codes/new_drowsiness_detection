@@ -55,6 +55,14 @@ validation_generator = val_datagen.flow_from_directory(
     shuffle=False
 )
 
+# Display dataset information
+print(f"Total training images (before augmentation): {train_generator.samples}")
+steps_per_epoch = train_generator.samples // BATCH_SIZE
+augmented_images_per_epoch = steps_per_epoch * BATCH_SIZE
+print(f"Images processed per epoch (augmented + original): {augmented_images_per_epoch}")
+total_augmented_images = augmented_images_per_epoch * EPOCHS
+print(f"Total augmented images across all epochs: {total_augmented_images}")
+
 # Define CNN Model
 model = Sequential([
     Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_WIDTH, IMG_HEIGHT, 1)),
